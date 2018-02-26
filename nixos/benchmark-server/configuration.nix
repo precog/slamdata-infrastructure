@@ -48,6 +48,7 @@
      bashlauncher = import /etc/nixos/bashLauncher.nix;
      benchmarkrunner = import /etc/nixos/benchmarkRunner.nix;
    in  (with pkgs; [
+     awscli
      wget
      vim
      jre
