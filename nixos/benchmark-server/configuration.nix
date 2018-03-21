@@ -45,9 +45,10 @@
   # $ nix-env -qaP | grep wget
   environment.systemPackages =
    let
-     bashlauncher = import /etc/nixos/bashLauncher.nix;
+     scalalauncher = import /etc/nixos/scalaLauncher.nix;
      benchmarkrunner = import /etc/nixos/benchmarkRunner.nix;
    in  (with pkgs; [
+     git
      awscli
      wget
      vim
@@ -59,7 +60,7 @@
      jq
      file
      patchelf
-  ]) ++ [ bashlauncher benchmarkrunner ];
+  ]) ++ [ scalalauncher benchmarkrunner ];
 
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
