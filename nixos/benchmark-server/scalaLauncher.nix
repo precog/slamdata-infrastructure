@@ -8,8 +8,7 @@ stdenv.mkDerivation rec {
 
   src = fetchurl {
     curlOpts = ["-L" "-H" "Accept:application/octet-stream"];
-    #url = "https://${githubToken}:@api.github.com/repos/slamdata/launcher/releases/assets/${assetId}";
-    url = "https://b4f3d049452b172c3dcf8b6509abb3bdfb31805c:@api.github.com/repos/slamdata/launcher/releases/assets/${assetId}";
+    url = "https://${githubToken}:@api.github.com/repos/slamdata/launcher/releases/assets/${assetId}";
     sha256 = "f54d48779cb1689377191ba6c417dd1d96e3681050f13414db4fe82432cc8f0a";
   };
 
