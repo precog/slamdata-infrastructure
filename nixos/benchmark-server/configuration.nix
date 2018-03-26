@@ -72,6 +72,15 @@
 
   # Enable the OpenSSH daemon.
   services.openssh.enable = true;
+  services.openssh.passwordAuthentication = false;
+
+  # Configure cron
+  services.cron = {
+    enable = true;
+    systemCronJobs = [
+      "59 23 * * * sduser aws s3 sync /home/sduser/outputdata s3://slamdata-benchmarks-output"
+    ];
+  };
 
   # Edit NIX_PATH with ssh-config-file path
   # in order to allow fetchgitPrivate to pull slamdata repos
