@@ -78,7 +78,7 @@
   services.cron = {
     enable = true;
     systemCronJobs = [
-      "59 23 * * * sduser aws s3 sync /home/sduser/outputdata s3://slamdata-benchmarks-output"
+      "59 23 * * * sduser jq '.' /home/sduser/outputdata/* 2>&1 > /dev/null && aws s3 sync /home/sduser/outputdata s3://slamdata-benchmarks-output"
     ];
   };
 
