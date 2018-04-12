@@ -45,9 +45,10 @@
   # $ nix-env -qaP | grep wget
   environment.systemPackages =
    let
-     bashlauncher = import /etc/nixos/bashLauncher.nix;
+     scalalauncher = import /etc/nixos/scalaLauncher.nix;
      benchmarkrunner = import /etc/nixos/benchmarkRunner.nix;
    in  (with pkgs; [
+     git
      awscli
      wget
      vim
@@ -59,7 +60,7 @@
      jq
      file
      patchelf
-  ]) ++ [ bashlauncher benchmarkrunner ];
+  ]) ++ [ scalalauncher benchmarkrunner ];
 
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
@@ -71,6 +72,15 @@
 
   # Enable the OpenSSH daemon.
   services.openssh.enable = true;
+  services.openssh.passwordAuthentication = false;
+
+  # Configure cron
+  services.cron = {
+    enable = true;
+    systemCronJobs = [
+      "59 23 * * * sduser jq '.' /home/sduser/outputdata/* 2>&1 > /dev/null && aws s3 sync /home/sduser/outputdata s3://slamdata-benchmarks-output"
+    ];
+  };
 
   # Edit NIX_PATH with ssh-config-file path
   # in order to allow fetchgitPrivate to pull slamdata repos
